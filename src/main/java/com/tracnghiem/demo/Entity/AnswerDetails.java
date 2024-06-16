@@ -5,12 +5,12 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "answer details")
+@Table(name = "answer_details")
 public class AnswerDetails {
     @EmbeddedId
     private AnswerDetailsId id;
 
-    @Column(name = "selected answer", nullable = false)
+    @Column(name = "selected_answer", nullable = false)
     private Integer selectedAnswer;
 
     @MapsId("answerId")

@@ -27,9 +27,9 @@ public class RoleController {
     }
 
     @PutMapping("/{id}")
-    public void updateRole(@PathVariable(name = "id") Long id,
+    public void updateRole(@PathVariable(name = "id") int id,
                            @RequestBody RoleUpdateForm form) {
-        //form.setId(id);
+        form.setId(id);
         roleService.updateRole(form);
     }
 

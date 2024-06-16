@@ -1,13 +1,12 @@
-
 package com.tracnghiem.demo.Controller;
 
 import com.tracnghiem.demo.Entity.Faculty;
-import com.tracnghiem.demo.Service.IFacultyService;
+import com.tracnghiem.demo.Service.FacultyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-        import java.util.List;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -15,16 +14,16 @@ import java.util.Optional;
 public class FacultyController {
 
     @Autowired
-    private IFacultyService facultyService;
+    private FacultyServiceImpl facultyServiceImpl;
 
     @GetMapping
     public List<Faculty> getAllFaculties() {
-        return facultyService.findAll();
+        return facultyServiceImpl.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Faculty> getFacultyById(@PathVariable Long id) {
-        Optional<Faculty> faculty = facultyService.findById(id);
+    public ResponseEntity<Faculty> getFacultyById(@PathVariable Integer id) {
+        Optional<Faculty> faculty = facultyServiceImpl.findById(id);
         if (faculty.isPresent()) {
             return ResponseEntity.ok(faculty.get());
         } else {
@@ -34,29 +33,28 @@ public class FacultyController {
 
     @PostMapping
     public Faculty createFaculty(@RequestBody Faculty faculty) {
-        return facultyService.save(faculty);
+        return facultyServiceImpl.save(faculty);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Faculty> updateFaculty(@PathVariable Long id, @RequestBody Faculty facultyDetails) {
-        Optional<Faculty> faculty = facultyService.findById(id);
+    public ResponseEntity<Faculty> updateFaculty(@PathVariable Integer id, @RequestBody Faculty facultyDetails) {
+        Optional<Faculty> faculty = facultyServiceImpl.findById(id);
         if (faculty.isPresent()) {
             Faculty updatedFaculty = faculty.get();
-            //updatedFaculty.setName(facultyDetails.getName());
-            return ResponseEntity.ok(facultyService.save(updatedFaculty));
+            updatedFaculty.setFacultyName(facultyDetails.getFacultyName());
+            return ResponseEntity.ok(facultyServiceImpl.save(updatedFaculty));
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFaculty(@PathVariable Long id) {
-        if (facultyService.findById(id).isPresent()) {
-            facultyService.deleteById(id);
+    public ResponseEntity<Void> deleteFaculty(@PathVariable Integer id) {
+        if (facultyServiceImpl.findById(id).isPresent()) {
+            facultyServiceImpl.deleteById(id);
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 }
-

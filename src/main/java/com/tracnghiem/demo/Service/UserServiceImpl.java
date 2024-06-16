@@ -1,7 +1,9 @@
 package com.tracnghiem.demo.Service;
 
+import com.tracnghiem.demo.DTO.User.UserResponseDTO;
 import com.tracnghiem.demo.Entity.User;
 import com.tracnghiem.demo.Repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import java.util.Optional;
 public class UserServiceImpl implements IUserService {
 
     private final UserRepository userRepository;
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -52,5 +56,15 @@ public class UserServiceImpl implements IUserService {
         } else {
             throw new RuntimeException("User not found with id " + id);
         }
+    }
+
+    @Override
+    public UserResponseDTO login(String email, String password) {
+        User user = userRepository.findByEmailAndPassword(email, password)
+                .orElseThrow(() -> new RuntimeException("Invalid email or password"));
+
+        UserResponseDTO userResponseDTO = modelMapper.map(user, UserResponseDTO.class);
+        userResponseDTO.setRoleName(user.getRole().getName());
+        return userResponseDTO;
     }
 }

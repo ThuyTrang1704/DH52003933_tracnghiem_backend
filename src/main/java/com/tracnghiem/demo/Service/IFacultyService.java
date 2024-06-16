@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface IFacultyService {
     List<Faculty> findAll();
-    Optional<Faculty> findById(Long id);
+    Optional<Faculty> findById(Integer id);
     Faculty save(Faculty faculty);
-    void deleteById(Long id);
+    void deleteById(Integer id);
 }

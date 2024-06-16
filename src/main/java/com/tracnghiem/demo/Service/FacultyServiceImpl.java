@@ -1,8 +1,7 @@
-package com.tracnghiem.demo.Service.impl;
+package com.tracnghiem.demo.Service;
 
 import com.tracnghiem.demo.Entity.Faculty;
 import com.tracnghiem.demo.Repository.FacultyRepository;
-import com.tracnghiem.demo.Service.IFacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
-    public Optional<Faculty> findById(Long id) {
+    public Optional<Faculty> findById(Integer id) {
         return facultyRepository.findById(id);
     }
 
@@ -31,7 +30,7 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         facultyRepository.deleteById(id);
     }
 }

@@ -37,7 +37,8 @@ public class ClassController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ClassEntity> updateClass(@PathVariable Integer id, @RequestBody ClassEntity classDetails) {
+    public ResponseEntity<ClassEntity> updateClass(@PathVariable Integer id,
+                                                   @RequestBody ClassEntity classDetails) {
         Optional<ClassEntity> classEntity = classService.findById(id);
         if (classEntity.isPresent()) {
             ClassEntity updatedClass = classEntity.get();

@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "exam details")
+@Table(name = "exam_details")
 public class ExamDetails {
     @EmbeddedId
     private ExamDetailsId id;
@@ -20,7 +20,7 @@ public class ExamDetails {
     @JoinColumn(name = "QuestionID", nullable = false)
     private Question question;
 
-    @Column(name = "order", nullable = false)
+    @Column(name = "`order`", nullable = false)
     private Integer order;
 
     // Getters and setters

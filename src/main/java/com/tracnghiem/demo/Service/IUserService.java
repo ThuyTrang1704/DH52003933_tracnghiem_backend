@@ -1,5 +1,6 @@
 package com.tracnghiem.demo.Service;
 
+import com.tracnghiem.demo.DTO.User.UserResponseDTO;
 import com.tracnghiem.demo.Entity.User;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface IUserService {
     User updateUser(Long id, User userDetails);
 
     void deleteUser(Long id);
+
+    UserResponseDTO login(String email, String password);
 }

@@ -33,56 +33,44 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public void createRole(RoleCreateForm form) {
-        
+        Role role = new Role();
+        role.setName(form.getName());
+        // Set other fields as necessary
+        roleRepository.save(role);
     }
 
     @Override
     public void updateRole(RoleUpdateForm form) {
-
-    }
-
-    @Override
-    public Role updateRole(Long id, RoleUpdateForm form) {
-        return null;
-    }
-
-    @Override
-    public void deleteRole(Long id) {
-
-    }
-
-    //   @Override
-//    public Role createRole(RoleCreateForm form) {
-//        Role role = new Role();
-//        role.setName(form.getName());
-//        // Set other fields as necessary
-//        return roleRepository.save(role);
-//    }
-//
-//    @Override
-//    public void updateRole(RoleUpdateForm form) {
-//
-//    }
-//
-//    @Override
-//    public Role updateRole(Long id, RoleUpdateForm form) {
-//        Optional<Role> existingRole = roleRepository.findById(id);
+//        Optional<Role> existingRole = roleRepository.findById(form.getId());
 //        if (existingRole.isPresent()) {
 //            Role role = existingRole.get();
 //            role.setName(form.getName());
 //            // Update other fields as necessary
-//            return roleRepository.save(role);
+//            roleRepository.save(role);
 //        } else {
-//            throw new RuntimeException("Role not found with id " + id);
+//            throw new RuntimeException("Role not found with id " + form.getId());
 //        }
-//    }
+    }
 
-//    @Override
-//    public void deleteRole(Long id) {
-//        if (roleRepository.existsById(id)) {
-//            roleRepository.deleteById(id);
-//        } else {
-//            throw new RuntimeException("Role not found with id " + id);
-//        }
-//    }
+    @Override
+    public Role updateRole(Long id, RoleUpdateForm form) {
+        Optional<Role> existingRole = roleRepository.findById(id);
+        if (existingRole.isPresent()) {
+            Role role = existingRole.get();
+            role.setName(form.getName());
+            // Update other fields as necessary
+            return roleRepository.save(role);
+        } else {
+            throw new RuntimeException("Role not found with id " + id);
+        }
+    }
+
+    @Override
+    public void deleteRole(Long id) {
+        if (roleRepository.existsById(id)) {
+            roleRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Role not found with id " + id);
+        }
+    }
 }

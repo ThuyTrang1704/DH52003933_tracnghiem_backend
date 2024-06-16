@@ -1,4 +1,4 @@
-package com.tracnghiem.demo.Service.impl;
+package com.tracnghiem.demo.Service;
 
 import com.tracnghiem.demo.Entity.ClassEntity;
 import com.tracnghiem.demo.Repository.ClassRepository;

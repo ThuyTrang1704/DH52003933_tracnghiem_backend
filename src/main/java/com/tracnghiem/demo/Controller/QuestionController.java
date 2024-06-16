@@ -3,10 +3,10 @@ package com.tracnghiem.demo.Controller;
 import com.tracnghiem.demo.Entity.Question;
 import com.tracnghiem.demo.Service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,27 +17,29 @@ public class QuestionController {
     private QuestionService questionService;
 
     @GetMapping
-    public Page<Question> getAllQuestions(Pageable pageable) {
-        return questionService.getAllQuestions(pageable);
+    public List<Question> getAllQuestions() {
+        return questionService.getAllQuestions();
     }
 
     @GetMapping("/{id}")
-    public Optional<Question> getQuestionById(@PathVariable Integer id) {
-        return questionService.getQuestionById(id);
+    public ResponseEntity<Question> getQuestionById(@PathVariable Integer id) {
+        Optional<Question> question = questionService.getQuestionById(id);
+        return question.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public Question createQuestion(@RequestBody Question question) {
-        return questionService.createQuestion(question);
+        return questionService.addQuestion(question);
     }
 
     @PutMapping("/{id}")
-    public Question updateQuestion(@PathVariable Integer id, @RequestBody Question questionDetails) {
-        return questionService.updateQuestion(id, questionDetails);
+    public ResponseEntity<Question> updateQuestion(@PathVariable Integer id, @RequestBody Question questionDetails) {
+        return ResponseEntity.ok(questionService.updateQuestion(id, questionDetails));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteQuestion(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteQuestion(@PathVariable Integer id) {
         questionService.deleteQuestion(id);
+        return ResponseEntity.noContent().build();
     }
 }
