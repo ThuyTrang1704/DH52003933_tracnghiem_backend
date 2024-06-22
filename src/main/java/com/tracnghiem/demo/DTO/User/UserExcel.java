@@ -1,28 +1,21 @@
 package com.tracnghiem.demo.DTO.User;
 
 import com.tracnghiem.demo.Entity.User;
-import jakarta.persistence.Entity;
-import lombok.Data;
-import org.springframework.http.HttpStatus;
-
 import java.util.List;
-@Data
-@Entity
 
 public class UserExcel {
+
     private int status;
     private String message;
-    private List<User> userList;
-    private int totalUsers;
+    private List<User> users;
+    private int total;
 
-    public UserExcel(int status, String message, List<User> userList, int totalUsers) {
+    public UserExcel(int status, String message, List<User> users, int total) {
         this.status = status;
         this.message = message;
-        this.userList = userList;
-        this.totalUsers = totalUsers;
+        this.users = users;
+        this.total = total;
     }
 
-    // Getters and setters
-
+    // Getters and Setters
 }
-

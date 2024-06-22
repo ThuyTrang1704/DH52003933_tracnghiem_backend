@@ -35,7 +35,6 @@ public class QuestionService {
                 .orElseThrow(() -> new RuntimeException("Question not found for this id :: " + id));
 
         question.setNameQuestion(questionDetails.getNameQuestion());
-        question.setDifficultyLevel(questionDetails.getDifficultyLevel());
         question.setCheckPoint(questionDetails.getCheckPoint());
         question.setChapter(questionDetails.getChapter());
         question.setSubject(questionDetails.getSubject());

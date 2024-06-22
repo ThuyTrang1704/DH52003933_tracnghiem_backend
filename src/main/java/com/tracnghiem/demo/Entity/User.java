@@ -15,7 +15,8 @@ public class User {
     private String gender;
     private String address;
     private String phone;
-    private String status;
+    @Column(nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean status;
 
     @ManyToOne
     @JoinColumn(name = "role_id")

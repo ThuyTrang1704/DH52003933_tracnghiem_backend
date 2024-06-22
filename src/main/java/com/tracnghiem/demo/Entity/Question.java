@@ -17,8 +17,6 @@ public class Question {
     @Column(name = "NameQuestion", nullable = false)
     private String nameQuestion;
 
-    @Column(name = "DifficultyLevel", nullable = false)
-    private Integer difficultyLevel;
 
     @Column(name = "CheckPoint", nullable = false)
     private Integer checkPoint;
