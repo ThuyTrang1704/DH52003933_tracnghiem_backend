@@ -1,20 +1,19 @@
 package com.tracnghiem.demo.Controller;
 
 import com.tracnghiem.demo.Entity.Question;
-import com.tracnghiem.demo.Service.QuestionService;
+import com.tracnghiem.demo.Service.IQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/questions")
 public class QuestionController {
 
     @Autowired
-    private QuestionService questionService;
+    private IQuestionService questionService;
 
     @GetMapping
     public List<Question> getAllQuestions() {
@@ -22,24 +21,22 @@ public class QuestionController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Question> getQuestionById(@PathVariable Integer id) {
-        Optional<Question> question = questionService.getQuestionById(id);
-        return question.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    public Question getQuestionById(@PathVariable Long id) {
+        return questionService.getQuestionById(id);
     }
 
     @PostMapping
-    public Question createQuestion(@RequestBody Question question) {
-        return questionService.addQuestion(question);
+    public Question addQuestion(@RequestBody Question question) {
+        return questionService.saveQuestion(question);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Question> updateQuestion(@PathVariable Integer id, @RequestBody Question questionDetails) {
-        return ResponseEntity.ok(questionService.updateQuestion(id, questionDetails));
+    public Question updateQuestion(@PathVariable Long id, @RequestBody Question updatedQuestion) {
+        return questionService.updateQuestion(id, updatedQuestion);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteQuestion(@PathVariable Integer id) {
+    public void deleteQuestion(@PathVariable Long id) {
         questionService.deleteQuestion(id);
-        return ResponseEntity.noContent().build();
     }
 }

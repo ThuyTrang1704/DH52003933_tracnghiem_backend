@@ -9,35 +9,22 @@ import java.sql.Time;
 @Entity
 @Table(name = "exam")
 public class Exam {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ExamID")
-    private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "UserID", nullable = false)
-    private User user;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "SubjectID", nullable = false)
-    private Subject subject;
+        @Column(nullable = false)
+        private String name;
 
-    @Column(name = "Quantity", nullable = false, length = 50)
-    private String quantity;
+        @Column(nullable = false)
+        private Integer totalPoints;
 
-    @Column(name = "Time", nullable = false)
-    private Time time;
+        @Column(nullable = false)
+        private Integer duration; // Thời gian làm bài tính bằng phút
 
-    @Column(name = "Point", nullable = false)
-    private Integer point;
+        @ManyToOne
+        @JoinColumn(name = "subject_id")
+        private Subject subject;
 
-    @ManyToOne
-    @JoinColumn(name = "StatusID", nullable = false)
-    private Status status;
-
-    @ManyToOne
-    @JoinColumn(name = "QuestionID", nullable = false)
-    private Question question;
-
-    // Getters and setters
 }

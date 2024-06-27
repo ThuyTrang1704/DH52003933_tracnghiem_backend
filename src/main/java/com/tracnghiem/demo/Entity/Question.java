@@ -9,34 +9,23 @@ import java.util.List;
 @Entity
 @Table(name = "question")
 public class Question {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "QuestionID")
-    private Integer id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @Column(name = "NameQuestion", nullable = false)
-    private String nameQuestion;
+        @Column(nullable = false)
+        private String content;
 
+//        @ManyToOne
+//        @JoinColumn(name = "correct_option_id")
+//        private Option correctOption;
 
-    @Column(name = "CheckPoint", nullable = false)
-    private Integer checkPoint;
+        @Column(nullable = false)
+        private Integer point;
 
-    @ManyToOne
-    @JoinColumn(name = "ChapterID", nullable = false)
-    private Chapter chapter;
+        @ManyToOne
+        @JoinColumn(name = "subject_id")
+        private Subject subject;
 
-    @ManyToOne
-    @JoinColumn(name = "SubjectID", nullable = false)
-    private Subject subject;
-
-    @ManyToOne
-    @JoinColumn(name = "UserID", nullable = false)
-    private User user;
-
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Answer> answers;
-
-    @ManyToOne
-    @JoinColumn(name = "AnswerID")
-    private Answer correctAnswer;
 }
+
